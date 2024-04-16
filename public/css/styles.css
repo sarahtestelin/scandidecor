@@ -1,5 +1,14 @@
 .titre {
     text-align: center;
     padding: 50px;
-
 }
+.carousel-item active {
+    width: 50px;
+}
+
+.navbar-brand {
+    width: 100px;
+    padding : 10px;
+}
+
+.navbar{ max-height: 70px; }
