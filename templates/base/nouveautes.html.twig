@@ -6,14 +6,16 @@
 
 {% block body %}
 	<div class="container py-2">
-		<h2 class="pb-5 text-center text-primary mt-4 pt-4 display-1">Nouveautés</h2>
+		<h2 class="pb-5 text-center text-primary mt-4 pt-4">Nouveautés</h2>
 		<div class='row row-cols-1 row-cols-md-2 row-cols-lg-4'>
 			{% for meuble in meubles %}
 				<div class='col mb-4'>
 					<div class="card h-100">
-						<img class="card-img-top" src="images/{{ meuble.image }}" alt="Card image cap">
+                    <a href="{{path('app_produit',{'id' :meuble.id})}}">
+						<img class="card-img-top" src="images/{{ meuble.image }}" alt="Card image cap"></a>
 						<div class="card-body">
-							<h5 class="card-title">{{ meuble.libelle }}</h5>
+						<a href="{{path('app_produit',{'id' :meuble.id})}}">
+							<h5 class="card-title">{{ meuble.libelle }}</h5></a>
 							<p class="card-text">{{ meuble.prix }}€</p>
 							<a href="#" class="ajout-panier">Ajouter au panier</a>
 						</div>
