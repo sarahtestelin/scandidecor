@@ -37,6 +37,9 @@ class Meuble
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'meubles')]
     private Collection $categorie;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->associers = new ArrayCollection();
@@ -134,6 +137,18 @@ class Meuble
     public function removeCategorie(Categorie $categorie): static
     {
         $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

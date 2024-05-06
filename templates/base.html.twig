@@ -8,6 +8,9 @@
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 			<link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css"/>
 			<link rel="stylesheet" href="{{asset("css/styles.css")}}"/>
 		{% endblock %}
@@ -16,7 +19,7 @@
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{ path('app_accueil') }}">
-					<img src="{{asset("css/images/logo.PNG")}}" class="navbar-brand logo-img" href="{{ path('app_accueil') }}" alt="logo de la marque">
+					<img src="{{asset("images/logo.PNG")}}" class="navbar-brand logo-img" href="{{ path('app_accueil') }}" alt="logo de la marque">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -24,18 +27,23 @@
 				<div class="collapse navbar-collapse" id="navbarColor04">
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item">
-							<a class="nav-link active" href="{{ path('app_accueil') }}"> Accueil <span class="visually-hidden">(current)</span></a>
+							<a class="nav-link active" href="{{ path('app_accueil') }}">
+								Accueil
+								<span class="visually-hidden">(current)</span>
+							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href=""></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href=""> Inspirations </a>
+							<a class="nav-link" href="">
+								Inspirations
+							</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Produits</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="">Nouveautés</a>
+								<a class="dropdown-item" href="{{ path('app_nouveaute') }}">Nouveautés</a>
 								<a class="dropdown-item" href="">Collection scandinave</a>
 								<a class="dropdown-item" href="">Collection aesthetic coloré</a>
 								<div class="dropdown-divider"></div>
@@ -55,8 +63,7 @@
 				</div>
 			</div>
 		</nav>
-	{% block body %}
-{% endblock %}
+		{% block body %}{% endblock %}
 		{% block javascripts %}
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 		{% endblock %}
