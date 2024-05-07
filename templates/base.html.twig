@@ -4,24 +4,25 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>
-			{% block title %}Scandidecor
-			{% endblock %}
+			{% block title %}Scandidecor{% endblock %}
 		</title>
 		{% block stylesheets %}
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 			<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 			<link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css"/>
-			<link rel="stylesheet" href="{{asset("css/styles.css")}}"/>
+			<link rel="stylesheet" href="{{ asset('css/styles.css') }}"/>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+			<link rel="shortcut icon" href="{{ asset('images/logo.PNG') }}" type="images/x-icon"/>
 		{% endblock %}
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{ path('app_accueil') }}">
-					<img src="{{asset("images/logo.PNG")}}" class="navbar-brand logo-img" href="{{ path('app_accueil') }}" alt="logo de la marque">
+					<img src="{{ asset('images/logo.PNG') }}" class="navbar-brand logo-img" alt="logo de la marque">
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarColor04">
@@ -32,69 +33,56 @@
 								<span class="visually-hidden">(current)</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href=""></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="">
-								Inspirations
-							</a>
-						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Produits</a>
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produits</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{{ path('app_nouveaute') }}">Nouveautés</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Plante artificielle</a>
-								<a class="dropdown-item" href="">Chaise</a>
-								<a class="dropdown-item" href="">Table</a>
-								<a class="dropdown-item" href="">Lit</a>
-								<a class="dropdown-item" href="">Table de nuit</a>
-								<a class="dropdown-item" href="">Décoration</a>
-								<a class="dropdown-item" href="">Meuble de télévision</a>
-								<a class="dropdown-item" href="">Commode</a>
-								<a class="dropdown-item" href="">Armoire</a>
-								<a class="dropdown-item" href="">Buffet</a>
-								<a class="dropdown-item" href="">Canapé</a>
-								<a class="dropdown-item" href="">Luminaire</a>
+								<a class="dropdown-item" href="#">Plante artificielle</a>
+								<a class="dropdown-item" href="#">Chaise</a>
+								<a class="dropdown-item" href="#">Table</a>
+								<a class="dropdown-item" href="#">Lit</a>
+								<a class="dropdown-item" href="#">Table de nuit</a>
+								<a class="dropdown-item" href="#">Décoration</a>
+								<a class="dropdown-item" href="#">Meuble de télévision</a>
+								<a class="dropdown-item" href="#">Commode</a>
+								<a class="dropdown-item" href="#">Armoire</a>
+								<a class="dropdown-item" href="#">Buffet</a>
+								<a class="dropdown-item" href="#">Canapé</a>
+								<a class="dropdown-item" href="#">Luminaire</a>
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="">Contact</a>
+							<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
 						</li>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-sm-2" type="search" placeholder="Rechercher"/>
-						<button class="btn btn-secondary my-2 my-sm-0" type="submit">
-							Rechercher
-						</button>
+					<form class="d-flex" action="{{ path('app_search') }}" method="get">
+						<input class="form-control me-sm-2" type="search" name="q" placeholder="Que recherchez-vous" required>
+						<button class="rechercher" type="submit">Rechercher</button>
 					</form>
 					<ul class="navbar-nav me-auto">
 						{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_login')}}">Se connecter
-								</a>
+								<a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_register')}}">S'inscrire
-								</a>
+								<a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_logout')}}">
-									{{app.user.email}}
-									<i class="bi
-										bi-x-circle-fill"></i>
+								<a class="nav-link" href="{{ path('app_logout') }}">
+									{{ app.user.email }}
+									<i class="bi bi-x-circle-fill"></i>
 								</a>
 							</li>
 						{% endif %}
-					</div>
+					</ul>
 				</div>
-			</nav>
-			{% block body %}{% endblock %}
-			{% block javascripts %}
-				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-			{% endblock %}
-		</body>
+			</div>
+		</nav>
+		{% block body %}{% endblock %}
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+		{% endblock %}
 	</body>
 </html>

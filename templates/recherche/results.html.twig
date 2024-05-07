@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    {{ parent() }} Nouveautés
-{% endblock %}
+{% block title %}Résultats de la recherche{% endblock %}
+
 {% block body %}
-    <div class="container py-2">
-        <h2 class="pb-5 text-center text-primary mt-4 pt-4">Nouveautés</h2>
+<h2 class="pb-5 text-center text-primary mt-4 pt-4">Résultats pour "{{ query }}"</h2>
+    {% if meubles %}
+        <ul>
+        <div class="container py-2">
         <div class='row row-cols-1 row-cols-md-2 row-cols-lg-4'>
             {% for meuble in meubles %}
-            <div class='col mb-4'>
+                <div class='col mb-4'>
                 <div class="card h-100">
                     <a href="{{ path('app_produit', {'id' : meuble.id}) }}">
                         <img class="card-img-top" src="images/{{ meuble.image }}" alt="{{ meuble.libelle }}">
@@ -32,7 +33,8 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
-    </div>
+        </ul>
+    {% else %}
+        <p>Aucun produit trouvé.</p>
+    {% endif %}
 {% endblock %}
-

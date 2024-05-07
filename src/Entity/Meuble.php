@@ -40,10 +40,17 @@ class Meuble
     #[ORM\Column(type: Types::TEXT)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Favoris')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->associers = new ArrayCollection();
         $this->categorie = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,6 +156,33 @@ class Meuble
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavori($this);
+        }
 
         return $this;
     }

@@ -20,7 +20,15 @@ class MeubleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Meuble::class);
     }
-
+    public function findBySearchQuery(string $query)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.libelle LIKE :query OR m.description LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult();
+    }
+}
     //    /**
     //     * @return Meuble[] Returns an array of Meuble objects
     //     */
@@ -45,4 +53,4 @@ class MeubleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+
