@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Informations du Client
+{% endblock %}
+
+{% block body %}
+    <div class="container py-2">
+        <h2 class="pb-5 text-center text-primary mt-4 pt-4">Votre profil</h2>
+        <h2 class="premiertitre" style="font-family: inherit;">Informations du client</h2>
+        <p>Votre email : {{ user.email }}</p>
+        
+        <h2 class="meublefavoris text-center ">Vos meubles favoris</h2>
+        <div class='row row-cols-1 row-cols-md-2 row-cols-lg-4'>
+            {% for meuble in user.Favoris %}
+                <div class='col mb-4'>
+                    <div class="card h-100">
+                        <a href="{{ path('app_produit', {'id' : meuble.id}) }}">
+                            <img class="card-img-top" src="{{ asset('images/' ~ meuble.image) }}" alt="{{ meuble.libelle }}">
+                        </a>
+                        <div class="card-body">
+                            <a href="{{ path('app_produit', {'id' : meuble.id}) }}">
+                                <h5 class="card-title">{{ meuble.libelle }}</h5>
+                            </a>
+                            <p class="card-text">{{ meuble.prix }}€</p>
+                            <a href="#" class="ajout-panier">Ajouter au panier</a>
+                            {% if app.user is not null %}
+                                {% if meuble not in app.user.Favoris %}
+                                    <a href="{{ path('app_favoris_produit', {'id' : meuble.id, 'redirect': app.request.uri}) }}"><i class="bi bi-heart"></i></a>
+                                {% else %}
+                                    <a href="{{ path('app_suppfav', {'id' : meuble.id, 'redirect': app.request.uri}) }}"><i class="bi-heart-fill"></i></a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center">Aucun meuble en favoris.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

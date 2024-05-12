@@ -112,3 +112,45 @@ a {
         margin-bottom: 5px;
         padding: 0px 15px 0px 15px;
 }
+
+.premiertitre{
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+
+.meublefavoris{
+    font-size: 20px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.bi-person{
+    font-size: 20px;
+    color: #333;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.bi-person-x{
+    font-size: 20px;
+    color: #333;
+    margin-right: 10px;
+    
+}
+
+.small-text {
+    font-size: 12px; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-transform: none;
+    margin-bottom: 20px;
+}
+.small-textconnect{
+    font-size: 14px; 
+    text-transform: none;
+    margin-left: 20px;
+}
+.small-textdisconnect{
+    font-size: 14px; 
+    text-transform: none;
+}
