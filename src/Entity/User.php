@@ -41,9 +41,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Meuble::class, inversedBy: 'users')]
     private Collection $Favoris;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
+
+    
+
+    
+
     public function __construct()
     {
         $this->Favoris = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -144,4 +152,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+
+
+
+    
+    
 }

@@ -16,7 +16,7 @@
                 <div class="product-title">{{ meuble.libelle }}</div>
                 <div class="product-description">{{ meuble.description }}</div>
                 <div class="product-price">{{ meuble.prix }} €</div>
-                <a href="#" class="add-to-cart">Ajouter au panier</a>
+                <a href="{{ path('app_ajoutpanier', {'id' : meuble.id}) }}" class="add-to-cart">Ajouter au panier</a>
                 {% if app.user %}
                     {% if meuble not in app.user.favoris %}
                         <a href='{{ path('app_favoris_produit', {'id': meuble.id}) }}'><i class="bi-heart"></i></a>

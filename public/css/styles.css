@@ -138,6 +138,12 @@ a {
     
 }
 
+.bi-person-plus{
+    font-size: 20px;
+    color: #333;
+    margin-right: 10px;
+}
+
 .small-text {
     font-size: 12px; 
     margin-top: 5px;
@@ -147,12 +153,25 @@ a {
 }
 .small-textconnect{
     font-size: 14px; 
+    margin-top: 10%;
+    margin-bottom: 5px;
     text-transform: none;
-    margin-left: 20px;
+    margin-bottom: 20px;
 }
+
 .small-textdisconnect{
     font-size: 14px; 
+    margin-top: 10%;
+    margin-bottom: 5px;
     text-transform: none;
+    margin-bottom: 20px;
+}
+
+.bi-cart3{
+    font-size: 20px;
+    color: #333;
+    margin-right: 10px;
+    
 }
 
 .btnformulaire{
@@ -169,4 +188,41 @@ a {
     cursor: pointer;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
     margin-right: 10px;
+}
+.align-items-center{
+    border-radius: 0px;
+    
+}
+
+.text-muted{
+    margin-bottom: 3%;
+}
+
+.recap-item {
+    margin-bottom: 10px;
+}
+
+.recapitulatif{
+    margin-bottom: 3%;
+}
+
+.btn-danger{
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ffffff;
+    color: #6C757D;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-right: 10px;
+}
+
+.reduire{
+    margin-top: 30px;
+    margin-right: 450px;
 }

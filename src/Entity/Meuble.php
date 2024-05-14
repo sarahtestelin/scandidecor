@@ -46,11 +46,18 @@ class Meuble
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Favoris')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Ajouter>
+     */
+    #[ORM\OneToMany(targetEntity: Ajouter::class, mappedBy: 'meuble')]
+    private Collection $ajouters;
+
     public function __construct()
     {
         $this->associers = new ArrayCollection();
         $this->categorie = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->ajouters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +189,36 @@ class Meuble
     {
         if ($this->users->removeElement($user)) {
             $user->removeFavori($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ajouter>
+     */
+    public function getAjouters(): Collection
+    {
+        return $this->ajouters;
+    }
+
+    public function addAjouter(Ajouter $ajouter): static
+    {
+        if (!$this->ajouters->contains($ajouter)) {
+            $this->ajouters->add($ajouter);
+            $ajouter->setMeuble($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAjouter(Ajouter $ajouter): static
+    {
+        if ($this->ajouters->removeElement($ajouter)) {
+            // set the owning side to null (unless already changed)
+            if ($ajouter->getMeuble() === $this) {
+                $ajouter->setMeuble(null);
+            }
         }
 
         return $this;
