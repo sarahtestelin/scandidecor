@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Confirmation de commande
+{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <h2 class="pb-5 text-center text-primary mt-4 pt-4">Confirmation de commande</h2>
+    <div class="row">
+        {% if app.user %}
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Merci pour votre commande !</h4>
+                    <p>Votre commande a bien été passée. Vous recevrez un email de confirmation sous peu.</p>
+                    <hr>
+                    <p class="mb-0">Le délai de livraison est de 10 jours. Nous vous informerons dès que votre commande sera expédiée.</p>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5>Récapitulatif de la commande</h5>
+                    </div>
+                    <div class="card-body">
+                        {% set total_produits = 0 %}
+                        {% if app.user.panier.ajouters is not empty %}
+                            <ul class="list-group">
+                                {% for a in app.user.panier.ajouters %}
+                                    {% set produit_total = a.quantite * a.meuble.prix %}
+                                    {% set total_produits = total_produits + produit_total %}
+                                    <li class="list-group-item no-border-radius">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img src="images/{{ a.meuble.image }}" alt="{{ a.meuble.libelle }}" style="width: 120px; height: auto;" class="no-border-radius">
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h5 class="mb-1">{{ a.meuble.libelle }}</h5>
+                                                <small class="text-muted">Quantité : {{ a.quantite }}</small><br>
+                                                <small class="text-muted">Prix unitaire : {{ a.meuble.prix }}€</small>
+                                            </div>
+                                            <div>
+                                                <h6>{{ produit_total }}€</h6>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                            <div class="d-flexy justify-content-between">
+                                <h6>Total des produits :</h6>
+                                <h6>{{ total_produits }}€</h6>
+                            </div>
+                            <div class="d-flexy justify-content-between">
+                                <h6>Livraison :</h6>
+                                <h6>4,00€</h6>
+                            </div>
+                            <hr>
+                            <div class="d-flexy justify-content-between">
+                                <h5>Total :</h5>
+                                <h5>{{ total_produits + 4 }}€</h5>
+                            </div>
+                        {% else %}
+                            <p class="text-muted">Votre panier est vide.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">Veuillez vous <a href="{{ path('app_login') }}">connecter</a> ou <a href="{{ path('app_register') }}">créer un compte</a> pour voir votre confirmation de commande.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

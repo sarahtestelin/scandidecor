@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Mentions Légales
+{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('notice') %}
+        <h2 class="alert alert-warning text-center mt-4 mb-4" role="alert">
+            {{ message }}
+        </h2>
+    {% endfor %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 text-primary">
+                <h1 class="text-center text-primary mt-4 pt-4">Mentions Légales</h1>
+
+                <h2 class="text-primary">Éditeur du site :</h2>
+                <p class="text-secondary">
+                    Nom : Sarah Testelin<br>
+                    Adresse : 123 Rue de l'Avenir, 62210 Avion, France<br>
+                    Téléphone : +33 6 12 34 56 78<br>
+                    Email : contact@scandidecor.fr<br>
+                    SIRET : 123 456 789 00012<br>
+                    TVA intracommunautaire : FR12345678901
+                </p>
+
+                <h2 class="text-primary">Hébergement :</h2>
+                <p class="text-secondary">
+                    Nom de l'hébergeur : OVH<br>
+                    Adresse de l'hébergeur : 2 Rue Kellermann, 59100 Roubaix, France<br>
+                    Téléphone : 1007 (numéro gratuit depuis un poste fixe)<br>
+                    Site web : <a href="https://www.ovh.com" target="_blank" class="text-info">www.ovh.com</a>
+                </p>
+
+                <h2 class="text-primary">Directrice de la publication :</h2>
+                <p class="text-secondary">Sarah Testelin</p>
+
+                <h2 class="text-primary">Propriété intellectuelle :</h2>
+                <p class="text-secondary">
+                    Le site internet ainsi que l'ensemble des droits y afférents est la propriété exclusive de Sarah Testelin. Toute reproduction, intégrale ou partielle, du site est systématiquement soumise à l'autorisation de la propriétaire. Toutefois, les liaisons du type hypertextes vers le site sont autorisées sans demandes spécifiques.
+                </p>
+
+                <h2 class="text-primary">Données personnelles :</h2>
+                <p class="text-secondary">
+                    Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par Sarah Testelin pour la gestion des commandes et des clients. Elles sont conservées pendant 3 ans et sont destinées à Sarah Testelin. Conformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : Sarah Testelin (<a href="mailto:contact@scandidecor.fr" class="text-info">contact@scandidecor.fr</a>).
+                </p>
+
+                <h2 class="text-primary">Cookies :</h2>
+                <p class="text-secondary">
+                    Le site scandidecor.fr peut être amené à vous demander l'acceptation des cookies pour des besoins de statistiques et d'affichage. Un cookie est une information déposée sur votre disque dur par le serveur du site que vous visitez. Il contient plusieurs données qui sont stockées sur votre ordinateur dans un simple fichier texte auquel un serveur accède pour lire et enregistrer des informations.
+                </p>
+
+                <h2 class="text-primary">Responsabilité :</h2>
+                <p class="text-secondary">
+                    Sarah Testelin met tout en œuvre pour offrir aux utilisateurs des informations et/ou des outils disponibles et vérifiés, mais ne saurait être tenue pour responsable des erreurs, d'une absence de disponibilité des informations et/ou de la présence de virus sur son site. Les informations fournies par Sarah Testelin le sont à titre indicatif et ne sauraient dispenser l'utilisateur d'une analyse complémentaire et personnalisée. Sarah Testelin ne saurait garantir l'exactitude, la complétude, l'actualité des informations diffusées sur son site.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

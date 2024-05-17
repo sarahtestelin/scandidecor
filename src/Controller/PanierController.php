@@ -111,7 +111,12 @@ public function panier(Meuble $meuble, EntityManagerInterface $em): Response
         return $this->redirectToRoute('app_voirpanier');
     }
     
-
+    #[Route('/commande', name: 'app_commande')]
+    public function commande(): Response
+    {
+        return $this->render('panier/commande.html.twig', [
+        ]);
+    }
 }
 
 
