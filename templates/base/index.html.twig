@@ -1,4 +1,62 @@
-{% extends 'base.html.twig' %} {% block title %}{{ parent() }}Accueil{%
-endblock%} {% block body %}
-<h1 class="text-center text-primary">Scandidecor</h1>
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }}
+{% endblock %}
+{% block body %}
+<h1 class="titre">Scandidecor</h1>
+<div id="carouselExampleIndicators" class="carousel slide">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="{{asset("images/home1.PNG")}}" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="{{asset("images/home2.PNG")}}" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="{{asset("images/home3.PNG")}}" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+		<div class="container py-2">
+        <h2 class="pb-5 text-center text-primary mt-4 pt-4">Nouveautés</h2>
+        <div class='row row-cols-1 row-cols-md-2 row-cols-lg-4'>
+            {% for meuble in nouveautes %}
+            <div class='col mb-4'>
+                <div class="card h-100">
+                    <a href="{{ path('app_produit', {'id' : meuble.id}) }}">
+                        <img class="card-img-top" src="images/{{ meuble.image }}" alt="{{ meuble.libelle }}">
+                    </a>
+                    <div class="card-body">
+                        <a href="{{ path('app_produit', {'id' : meuble.id}) }}">
+                            <h5 class="card-title">{{ meuble.libelle }}</h5>
+                        </a>
+                        <p class="card-text">{{ meuble.prix }}€</p>
+                        <a href="{{ path('app_ajoutpanier', {'id' : meuble.id}) }}" class="ajout-panier">Ajouter au panier</a>
+                        {% if app.user is not null %}
+                            {% if meuble not in app.user.favoris %}
+                                <a href="{{ path('app_favoris_produit', {'id' : meuble.id, 'redirect': app.request.uri}) }}"><i class="bi bi-heart"></i></a>
+                            {% else %}
+                                <a href="{{ path('app_suppfav', {'id' : meuble.id, 'redirect': app.request.uri}) }}"><i class="bi-heart-fill"></i></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

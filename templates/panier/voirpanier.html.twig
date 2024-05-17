@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} Panier
+{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <h2 class="pb-5 text-center text-primary mt-4 pt-4">Votre panier</h2>
+    <div class="row">
+        {% if app.user %}
+            <div class="col-md-8">
+                {% set total_produits = 0 %}
+                {% if app.user.panier.ajouters is not empty %}
+                    <ul class="list-group">
+                        {% for a in app.user.panier.ajouters %}
+                            {% set produit_total = a.quantite * a.meuble.prix %}
+                            {% set total_produits = total_produits + produit_total %}
+                            <li class="list-group-item no-border-radius">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img src="images/{{ a.meuble.image }}" alt="{{ a.meuble.libelle }}" style="width: 120px; height: auto;" class="no-border-radius">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-1">{{ a.meuble.libelle }}</h5>
+                                        <div class="mb-1 d-flex align-items-center reduire">
+                                            <button onclick="location.href='{{ path('decrease_quantity', {'id': a.meuble.id}) }}'" class="btn btn-secondary btn-sm">-</button>
+                                            <span class="mx-2">{{ a.quantite }}</span>
+                                            <button onclick="location.href='{{ path('increase_quantity', {'id': a.meuble.id}) }}'" class="btn btn-secondary btn-sm">+</button>
+                                        </div>
+                                        <p class="mb-1">Prix : {{ produit_total }}€</p>
+                                    </div>
+                                    <div>
+                                        <a href="{{ path('remove_from_cart', {'id': a.meuble.id}) }}" class="btn btn-danger">Retirer</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Votre panier est vide.</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="sticky-top" style="top: 20px;">
+                    <h4 class="recapitulatif">Récapitulatif du panier</h4>
+                    <ul class="list-unstyled">
+                        <li class="recap-item"><strong>Produits :</strong> {{ total_produits }}€</li>
+                        <li class="recap-item"><strong>Livraison :</strong> 4,00€</li>
+                        <li class="recap-item"><strong>Total :</strong> {{ total_produits + 4 }}€</li>
+                    </ul>
+                    <a href="{{ path('app_commande') }}" class="btn btn-primary ajout-panier">Valider ma commande</a>
+                    <hr>
+                    <p class="text-muted">Expédié en 24 heures maximum</p>
+                    <p class="text-muted">Frais de port offerts dès 200€ d'achat</p>
+                    <p class="text-muted">Paiement sécurisé</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">Veuillez vous <a href="{{ path('app_login') }}">connecter</a> ou <a href="{{ path('app_register') }}">créer un compte</a> pour voir votre panier.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

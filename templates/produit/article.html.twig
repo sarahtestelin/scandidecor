@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ meuble.libelle }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h2 class="pb-5 text-center text-primary mt-4 pt-4">Scandidecor</h2>
+    <div class="product-container">
+        <div class="product">
+            <img src="{{ asset('images/' ~ meuble.image) }}" alt="{{ meuble.libelle }}">
+            <div class="product-info">
+                <div class="product-title">{{ meuble.libelle }}</div>
+                <div class="product-description">{{ meuble.description }}</div>
+                <div class="product-price">{{ meuble.prix }} €</div>
+                <a href="{{ path('app_ajoutpanier', {'id' : meuble.id}) }}" class="add-to-cart">Ajouter au panier</a>
+                {% if app.user %}
+                    {% if meuble not in app.user.favoris %}
+                        <a href='{{ path('app_favoris_produit', {'id': meuble.id}) }}'><i class="bi-heart"></i></a>
+                    {% else %}
+                        <a href='{{ path('app_suppfav', {'id': meuble.id}) }}'><i class="bi-heart-fill"></i></a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ path('app_login') }}"<i class="bi-heart"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
